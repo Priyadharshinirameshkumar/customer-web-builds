@@ -22,7 +22,9 @@ function Navbar() {
       </div>
 
       <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-        <li><NavLink to="/">Home</NavLink></li>
+        <li>
+  <a href="#home">Home</a>
+</li>
         <li>
     <a href="#templates">Templates</a>
 </li>

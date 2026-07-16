@@ -4,7 +4,7 @@ import heroImage from "../../assets/images/hero/hero-image.png";
 
 function Hero() {
   return (
-    <section className="hero">
+    <section id="home" className="hero">
       {/* Left Side */}
       <div className="container hero-container">
       <div className="hero-content">

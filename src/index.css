@@ -45,5 +45,13 @@ font-family:inherit;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
+}
+
+#home,
+#pricing,
+#portfolio,
+#templates,
+#reviews {
+    scroll-margin-top: 90px;
 }
