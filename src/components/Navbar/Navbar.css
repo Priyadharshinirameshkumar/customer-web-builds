@@ -96,3 +96,69 @@
 .navbar-button:hover {
   background-color: var(--primary-dark);
 }
+
+/* ==========================
+   Tablet
+========================== */
+
+@media (max-width: 1024px) {
+
+  .navbar{
+
+      padding:16px 30px;
+
+  }
+
+  .navbar-links{
+
+      gap:20px;
+
+  }
+
+}
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width:768px){
+
+.navbar{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:20px;
+
+padding:20px;
+
+}
+.navbar-logo{
+
+font-size:20px;
+
+}
+.navbar-links a{
+
+font-size:15px;
+
+}
+
+.navbar-links{
+
+flex-direction:column;
+
+width:100%;
+
+gap:15px;
+
+}
+
+.navbar-button{
+
+width:100%;
+
+}
+
+}
