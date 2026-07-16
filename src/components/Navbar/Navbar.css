@@ -162,3 +162,43 @@ width:100%;
 }
 
 }
+
+/* Navbar top */
+
+.navbar-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+
+/* Hamburger Button */
+
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    font-size:24px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.menu-toggle{
+    display:block;
+}
+
+.navbar-links{
+
+display:none;
+
+}
+
+.navbar-links.active{
+
+display:flex;
+
+}
+
+}
