@@ -6,7 +6,7 @@ import { templates } from "../../data/templates";
 
 function TemplatesGallery() {
   return (
-    <section className="templates-gallery">
+    <section id="templates" className="templates-gallery">
       <div className="container">
 
         <SectionHeader

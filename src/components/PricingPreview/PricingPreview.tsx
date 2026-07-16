@@ -5,7 +5,7 @@ import { pricingPlans } from "../../data/pricingPlans";
 
 function PricingPreview() {
   return (
-    <section className="pricing-preview">
+   <section id="pricing" className="pricing-preview">
       <div className="container">
 
         <h2 className="section-title">

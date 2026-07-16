@@ -107,20 +107,14 @@
    Right Side
 ========================== */
 
-.hero-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.hero-image{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.hero-image div {
-  width: 420px;
-  height: 320px;
-  border: 2px dashed var(--border-color);
-  border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-secondary);
-  font-size: 1.2rem;
+.hero-image img{
+    width:100%;
+    max-width:550px;
+    height:auto;
 }

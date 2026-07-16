@@ -43,3 +43,7 @@ cursor:pointer;
 font-family:inherit;
 
 }
+
+html {
+  scroll-behavior: smooth;
+}

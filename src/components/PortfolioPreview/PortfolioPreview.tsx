@@ -5,7 +5,7 @@ import { portfolioProjects } from "../../data/portfolioProjects";
 import SectionHeader from "../SectionHeader/SectionHeader";
 function PortfolioPreview() {
   return (
-    <section className="portfolio-preview">
+    <section id="portfolio" className="portfolio-preview">
       <div className="container">
 
         <SectionHeader

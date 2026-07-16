@@ -23,10 +23,21 @@ function Navbar() {
 
       <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/templates">Templates</NavLink></li>
-        <li><NavLink to="/pricing">Pricing</NavLink></li>
-        <li><NavLink to="/portfolio">Portfolio</NavLink></li>
-        <li><NavLink to="/reviews">Reviews</NavLink></li>
+        <li>
+    <a href="#templates">Templates</a>
+</li>
+
+<li>
+    <a href="#pricing">Pricing</a>
+</li>
+
+<li>
+    <a href="#portfolio">Portfolio</a>
+</li>
+
+<li>
+    <a href="#reviews">Reviews</a>
+</li>
       </ul>
 
       <button className="navbar-button">

@@ -6,7 +6,7 @@ import { testimonials } from "../../data/testimonials";
 
 function TestimonialsSection() {
   return (
-    <section className="testimonials-section">
+    <section id="reviews" className="testimonials-section">
       <div className="container">
 
         <SectionHeader
