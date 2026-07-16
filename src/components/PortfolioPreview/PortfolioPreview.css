@@ -1,0 +1,26 @@
+/* ==========================
+   Portfolio Section
+========================== */
+
+.portfolio-preview{
+    padding:80px 0;
+    background:white;
+}
+
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.portfolio-grid{
+
+gap:20px;
+
+}
+
+}
