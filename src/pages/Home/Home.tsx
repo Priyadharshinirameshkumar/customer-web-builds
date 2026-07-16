@@ -3,6 +3,7 @@ import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 import WebsiteFeatures from "../../components/WebsiteFeatures/WebsiteFeatures";
 import PricingPreview from "../../components/PricingPreview/PricingPreview";
 import PortfolioPreview from "../../components/PortfolioPreview/PortfolioPreview";
+import TemplatesGallery from "../../components/TemplatesGallery/TemplatesGallery";
 function Home() {
   return (
     <>
@@ -11,6 +12,7 @@ function Home() {
       <WebsiteFeatures />
       <PricingPreview />
      <PortfolioPreview />
+     <TemplatesGallery />
     </>
   );
 }
