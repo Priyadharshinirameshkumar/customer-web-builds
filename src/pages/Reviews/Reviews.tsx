@@ -1,5 +1,5 @@
-function Home() {
+function Reviews() {
   return <h1>Reviews Page</h1>;
 }
 
-export default Home;
+export default Reviews;

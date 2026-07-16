@@ -1,5 +1,5 @@
-function Home() {
-  return <h1>Thankyou Page</h1>;
+function ThankYou() {
+  return <h1>Thank You</h1>;
 }
 
-export default Home;
+export default ThankYou;

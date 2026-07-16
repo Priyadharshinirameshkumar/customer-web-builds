@@ -1,9 +1,7 @@
+import AppRoutes from "./routes/AppRoutes";
+
 function App() {
-  return (
-    <>
-      <h1>Customer Web Builds</h1>
-    </>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
