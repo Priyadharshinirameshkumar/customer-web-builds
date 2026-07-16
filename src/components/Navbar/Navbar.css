@@ -1,12 +1,98 @@
-.navbar{
-    padding:20px;
-    border-bottom:1px solid #ddd;
+/* ==========================
+   Navbar Container
+========================== */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 60px;
+
+  background-color: white;
+
+  border-bottom: 1px solid #e5e5e5;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
 }
 
-.navbar-links{
-    list-style:none;
+/* ==========================
+   Logo
+========================== */
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2563eb;
 }
 
-.navbar-button{
-    padding:10px;
+/* ==========================
+   Navigation
+========================== */
+
+.navbar-links {
+  display: flex;
+
+  gap: 35px;
+
+  list-style: none;
+}
+
+/* ==========================
+   Links
+========================== */
+
+.navbar-links a {
+  text-decoration: none;
+
+  color: #333;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  transition: color 0.3s ease;
+}
+
+/* Hover */
+
+.navbar-links a:hover {
+  color: #2563eb;
+}
+
+/* Active Link */
+
+.navbar-links a.active {
+  color: #2563eb;
+
+  font-weight: 700;
+}
+
+/* ==========================
+   CTA Button
+========================== */
+
+.navbar-button {
+  background-color: #2563eb;
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 24px;
+
+  border-radius: 8px;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s ease;
+}
+
+.navbar-button:hover {
+  background-color: #1d4ed8;
 }
