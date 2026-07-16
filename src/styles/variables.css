@@ -1,0 +1,33 @@
+:root {
+
+  /* Primary Colors */
+
+  --primary-color: #2563eb;
+  --primary-dark: #1d4ed8;
+
+  /* Background */
+
+  --background: #ffffff;
+
+  /* Text */
+
+  --text-primary: #222222;
+  --text-secondary: #666666;
+
+  /* Border */
+
+  --border-color: #e5e5e5;
+
+  /* Container */
+
+  --container-width: 1200px;
+
+  /* Border Radius */
+
+  --radius: 8px;
+
+  /* Transition */
+
+  --transition: 0.3s ease;
+
+}
