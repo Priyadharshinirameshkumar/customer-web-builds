@@ -1,30 +1,51 @@
-import "./Hero.css";
 import { Link } from "react-router-dom";
+import "./Hero.css";
 
 function Hero() {
   return (
     <section className="hero">
-
+      {/* Left Side */}
+      <div className="container hero-container">
       <div className="hero-content">
 
+        <p className="hero-tag">
+          🚀 Custom Web Design Services
+        </p>
+
         <h1>
-          Build Your Dream Website
-          <span> Without the Technical Headache</span>
+          Custom Websites That Help
+          <span> Your Business Grow</span>
         </h1>
 
-        <p>
-          We design and develop modern, responsive websites
-          for startups, small businesses and entrepreneurs.
-          From idea to launch, we help you every step of the way.
+        <p className="hero-description">
+          From idea to launch, we create fast,
+          responsive and customer-focused websites
+          for startups, freelancers and small businesses.
         </p>
+
+        <div className="hero-features">
+
+          <span>✔ Mobile First</span>
+
+          <span>✔ SEO Ready</span>
+
+          <span>✔ Ongoing Support</span>
+
+        </div>
 
         <div className="hero-buttons">
 
-          <Link to="/plan-website" className="primary-btn">
+          <Link
+            to="/plan-website"
+            className="primary-btn"
+          >
             Plan My Website
           </Link>
 
-          <Link to="/portfolio" className="secondary-btn">
+          <Link
+            to="/portfolio"
+            className="secondary-btn"
+          >
             View Portfolio
           </Link>
 
@@ -32,15 +53,18 @@ function Hero() {
 
       </div>
 
+      {/* Right Side */}
+
       <div className="hero-image">
 
-        <img
-          src="https://placehold.co/500x400"
-          alt="Website Illustration"
-        />
+        <div>
+    Website Illustration
+    <br />
+    Coming Soon
+  </div>
 
       </div>
-
+</div>
     </section>
   );
 }

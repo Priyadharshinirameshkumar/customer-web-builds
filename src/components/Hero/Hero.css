@@ -1,119 +1,126 @@
-.hero{
+/* ==========================
+   Hero Section
+========================== */
 
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:80px 60px;
-
-gap:50px;
-
-min-height:80vh;
-
+.hero {
+  padding: 80px 0;
 }
 
-.hero-content{
-
-flex:1;
-
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
 }
 
-.hero-content h1{
+/* ==========================
+   Left Side
+========================== */
 
-font-size:56px;
-
-line-height:1.2;
-
-margin-bottom:20px;
-
+.hero-content {
+  flex: 1;
 }
 
-.hero-content span{
-
-color:var(--primary-color);
-
+.hero-tag {
+  display: inline-block;
+  background: #eff6ff;
+  color: var(--primary-color);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-bottom: 24px;
 }
 
-.hero-content p{
-
-font-size:18px;
-
-color:var(--text-secondary);
-
-margin-bottom:40px;
-
-max-width:550px;
-
+.hero-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 24px;
 }
 
-.hero-buttons{
-
-display:flex;
-
-gap:20px;
-
+.hero-content h1 span {
+  color: var(--primary-color);
 }
 
-.primary-btn{
-
-background:var(--primary-color);
-
-color:white;
-
-padding:14px 30px;
-
-border-radius:var(--radius);
-
-transition:var(--transition);
-
+.hero-description {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 32px;
 }
 
-.primary-btn:hover{
+/* ==========================
+   Features
+========================== */
 
-background:var(--primary-dark);
-
+.hero-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
 }
 
-.secondary-btn{
-
-border:2px solid var(--primary-color);
-
-padding:14px 30px;
-
-border-radius:var(--radius);
-
-color:var(--primary-color);
-
-transition:var(--transition);
-
+.hero-features span {
+  background: #f8fafc;
+  padding: 10px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
 }
 
-.secondary-btn:hover{
+/* ==========================
+   Buttons
+========================== */
 
-background:var(--primary-color);
-
-color:white;
-
+.hero-buttons {
+  display: flex;
+  gap: 20px;
 }
 
-.hero-image{
-
-flex:1;
-
-display:flex;
-
-justify-content:center;
-
+.primary-btn,
+.secondary-btn {
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition);
 }
 
-.hero-image img{
+.primary-btn {
+  background: var(--primary-color);
+  color: white;
+}
 
-width:100%;
+.primary-btn:hover {
+  background: var(--primary-dark);
+}
 
-max-width:500px;
+.secondary-btn {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
 
-border-radius:12px;
+.secondary-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
 
+/* ==========================
+   Right Side
+========================== */
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image div {
+  width: 420px;
+  height: 320px;
+  border: 2px dashed var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
 }
