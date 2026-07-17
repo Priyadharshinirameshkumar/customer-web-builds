@@ -6,6 +6,7 @@ import PortfolioPreview from "../../components/PortfolioPreview/PortfolioPreview
 import TemplatesGallery from "../../components/TemplatesGallery/TemplatesGallery";
 import TestimonialsSection from "../../components/TestimonialsSection/TestimonialsSection";
 import CTA from "../../components/CTA/CTA";
+import Footer from "../../components/Footer/Footer";
 function Home() {
   return (
     <>
@@ -17,6 +18,7 @@ function Home() {
      <TemplatesGallery />
       <TestimonialsSection />
        <CTA />
+        <Footer />
     </>
   );
 }
