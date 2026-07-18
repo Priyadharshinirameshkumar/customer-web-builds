@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PlanWebsite.css";
 const websiteFeatures = [
   "Contact Form",
@@ -10,6 +11,7 @@ const websiteFeatures = [
   "E-Commerce Store",
 ];
 function PlanWebsite() {
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
 const [businessName, setBusinessName] = useState("");
 const [email, setEmail] = useState("");
@@ -19,6 +21,9 @@ const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
 const [hosting, setHosting] = useState("");
 const [maintenance, setMaintenance] = useState("");
 const [seo, setSeo] = useState("");
+const [additionalRequirements, setAdditionalRequirements] = useState("");
+
+const [needsConsultation, setNeedsConsultation] = useState(false);
 const handleFeatureChange = (feature: string) => {
   if (selectedFeatures.includes(feature)) {
     setSelectedFeatures(
@@ -28,6 +33,40 @@ const handleFeatureChange = (feature: string) => {
     setSelectedFeatures([...selectedFeatures, feature]);
   }
 };
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const validationErrors = {
+    fullName: "",
+    email: "",
+    phone: ""
+};
+if (fullName.trim() === "") {
+    validationErrors.fullName = "Full Name is required";
+}
+if (email.trim() === "") {
+    validationErrors.email = "Email is required";
+}
+if (phone.trim() === "") {
+    validationErrors.phone = "Phone Number is required";
+}
+setErrors(validationErrors);
+
+const hasErrors = Object.values(validationErrors).some(
+    (error) => error !== ""
+);
+
+if (hasErrors) {
+    return;
+}
+
+navigate("/booking");
+   
+};
+const [errors, setErrors] = useState({
+    fullName: "",
+    email: "",
+    phone: ""
+});
   return (
     <section className="plan-page">
 
@@ -43,7 +82,8 @@ const handleFeatureChange = (feature: string) => {
 
       </div>
 
-      <div className="plan-card">
+      <form className="plan-card"
+      onSubmit={handleSubmit}>
 
         <h2>Website Requirements</h2>
         <div className="form-section">
@@ -57,8 +97,20 @@ const handleFeatureChange = (feature: string) => {
       type="text"
       placeholder="Enter your full name"
       value={fullName}
-      onChange={(e) => setFullName(e.target.value)}
+      onChange={(e) => {
+        setFullName(e.target.value);
+
+        setErrors({
+            ...errors,
+            fullName: ""
+        });
+    }}
     />
+    {errors.fullName && (
+    <p className="error-message">
+        {errors.fullName}
+    </p>
+)}
   </div>
 
   <div className="form-group">
@@ -79,8 +131,20 @@ const handleFeatureChange = (feature: string) => {
       type="email"
       placeholder="Enter your email"
       value={email}
-      onChange={(e) => setEmail(e.target.value)}
+      onChange={(e) => {
+    setEmail(e.target.value);
+
+    setErrors({
+        ...errors,
+        email: ""
+    });
+}}
     />
+    {errors.email && (
+    <p className="error-message">
+        {errors.email}
+    </p>
+)}
   </div>
 
   <div className="form-group">
@@ -90,8 +154,20 @@ const handleFeatureChange = (feature: string) => {
       type="tel"
       placeholder="Enter your phone number"
       value={phone}
-      onChange={(e) => setPhone(e.target.value)}
+    onChange={(e) => {
+    setPhone(e.target.value);
+
+    setErrors({
+        ...errors,
+        phone: ""
+    });
+}}
     />
+    {errors.phone && (
+    <p className="error-message">
+        {errors.phone}
+    </p>
+)}
   </div>
   <fieldset className="form-section">
   <legend>Website Size</legend>
@@ -267,10 +343,51 @@ const handleFeatureChange = (feature: string) => {
     </div>
 
 </fieldset>
+<fieldset className="form-section">
+
+  <legend>Additional Requirements</legend>
+
+  <div className="form-group">
+
+    <label htmlFor="additionalRequirements">
+      Tell us anything else about your project
+    </label>
+
+    <textarea
+      id="additionalRequirements"
+      rows={5}
+      placeholder="Example: I already have a logo, I need multilingual support, I have an existing website..."
+      value={additionalRequirements}
+      onChange={(e) => setAdditionalRequirements(e.target.value)}
+    />
+
+  </div>
+
+  <label className="checkbox-option">
+
+    <input
+      type="checkbox"
+      checked={needsConsultation}
+      onChange={(e) =>
+        setNeedsConsultation(e.target.checked)
+      }
+    />
+
+    <span>
+      I don't know where to start. Please help me choose the right solution.
+    </span>
+
+  </label>
+
+</fieldset>
 
 </div>
-
-      </div>
+<div className="submit-section">
+<button type="submit">
+  Continue →
+</button>
+</div>
+</form>
 
     </section>
   );
