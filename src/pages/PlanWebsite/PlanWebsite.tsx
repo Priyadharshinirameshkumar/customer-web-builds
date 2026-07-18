@@ -6,6 +6,7 @@ function PlanWebsite() {
 const [businessName, setBusinessName] = useState("");
 const [email, setEmail] = useState("");
 const [phone, setPhone] = useState("");
+const [websiteSize, setWebsiteSize] = useState("");
   return (
     <section className="plan-page">
 
@@ -71,6 +72,53 @@ const [phone, setPhone] = useState("");
       onChange={(e) => setPhone(e.target.value)}
     />
   </div>
+  <fieldset className="form-section">
+  <legend>Website Size</legend>
+
+  <label className="radio-option">
+    <input
+      type="radio"
+      name="websiteSize"
+      value="1-5"
+      checked={websiteSize === "1-5"}
+      onChange={(e) => setWebsiteSize(e.target.value)}
+    />
+    <span>1–5 Pages (Small Website)</span>
+  </label>
+
+  <label className="radio-option">
+    <input
+      type="radio"
+      name="websiteSize"
+      value="6-10"
+      checked={websiteSize === "6-10"}
+      onChange={(e) => setWebsiteSize(e.target.value)}
+    />
+    <span>6–10 Pages (Business Website)</span>
+  </label>
+
+  <label className="radio-option">
+    <input
+      type="radio"
+      name="websiteSize"
+      value="11-20"
+      checked={websiteSize === "11-20"}
+      onChange={(e) => setWebsiteSize(e.target.value)}
+    />
+    <span>11–20 Pages (Large Website)</span>
+  </label>
+
+  <label className="radio-option">
+    <input
+      type="radio"
+      name="websiteSize"
+      value="20+"
+      checked={websiteSize === "20+"}
+      onChange={(e) => setWebsiteSize(e.target.value)}
+    />
+    <span>More than 20 Pages</span>
+  </label>
+</fieldset>
 
 </div>
 

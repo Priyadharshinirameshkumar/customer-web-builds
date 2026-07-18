@@ -66,3 +66,31 @@
     outline: none;
     border-color: #2563eb;
 }
+fieldset.form-section {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+fieldset legend {
+    padding: 0 8px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    cursor: pointer;
+}
+
+.radio-option span {
+    color: #374151;
+}
