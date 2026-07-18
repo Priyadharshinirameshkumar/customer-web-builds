@@ -1,12 +1,30 @@
 import { useState } from "react";
 import "./PlanWebsite.css";
-
+const websiteFeatures = [
+  "Contact Form",
+  "Appointment Booking",
+  "Automated Email Notifications",
+  "Live Chat",
+  "WhatsApp Integration",
+  "Blog",
+  "E-Commerce Store",
+];
 function PlanWebsite() {
   const [fullName, setFullName] = useState("");
 const [businessName, setBusinessName] = useState("");
 const [email, setEmail] = useState("");
 const [phone, setPhone] = useState("");
 const [websiteSize, setWebsiteSize] = useState("");
+const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+const handleFeatureChange = (feature: string) => {
+  if (selectedFeatures.includes(feature)) {
+    setSelectedFeatures(
+      selectedFeatures.filter((item) => item !== feature)
+    );
+  } else {
+    setSelectedFeatures([...selectedFeatures, feature]);
+  }
+};
   return (
     <section className="plan-page">
 
@@ -118,6 +136,24 @@ const [websiteSize, setWebsiteSize] = useState("");
     />
     <span>More than 20 Pages</span>
   </label>
+</fieldset>
+<fieldset className="form-section">
+  <legend>Website Features</legend>
+
+  {websiteFeatures.map((feature) => (
+    <label key={feature} className="checkbox-option">
+
+      <input
+        type="checkbox"
+        checked={selectedFeatures.includes(feature)}
+        onChange={() => handleFeatureChange(feature)}
+      />
+
+      <span>{feature}</span>
+
+    </label>
+  ))}
+
 </fieldset>
 
 </div>

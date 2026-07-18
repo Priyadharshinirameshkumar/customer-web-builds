@@ -94,3 +94,18 @@ fieldset legend {
 .radio-option span {
     color: #374151;
 }
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.checkbox-option input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.checkbox-option span {
+    color: #374151;
+}
