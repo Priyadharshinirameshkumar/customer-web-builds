@@ -16,6 +16,9 @@ const [email, setEmail] = useState("");
 const [phone, setPhone] = useState("");
 const [websiteSize, setWebsiteSize] = useState("");
 const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+const [hosting, setHosting] = useState("");
+const [maintenance, setMaintenance] = useState("");
+const [seo, setSeo] = useState("");
 const handleFeatureChange = (feature: string) => {
   if (selectedFeatures.includes(feature)) {
     setSelectedFeatures(
@@ -153,6 +156,115 @@ const handleFeatureChange = (feature: string) => {
 
     </label>
   ))}
+
+</fieldset>
+<fieldset className="form-section">
+
+    <legend>Support Requirements</legend>
+
+    <div className="form-group">
+
+        <label htmlFor="hosting">
+            Hosting
+        </label>
+
+        <select
+            id="hosting"
+            value={hosting}
+            onChange={(e) => setHosting(e.target.value)}
+        >
+
+            <option value="">
+                Select Hosting Option
+            </option>
+
+            <option value="Need Hosting">
+                Need Hosting
+            </option>
+
+            <option value="Already Have Hosting">
+                Already Have Hosting
+            </option>
+
+            <option value="Not Sure">
+                Not Sure
+            </option>
+
+        </select>
+
+    </div>
+
+    <div className="form-group">
+
+        <label htmlFor="maintenance">
+            Maintenance
+        </label>
+
+        <select
+            id="maintenance"
+            value={maintenance}
+            onChange={(e) => setMaintenance(e.target.value)}
+        >
+
+            <option value="">
+                Select Maintenance Frequency
+            </option>
+
+            <option value="Monthly">
+                Monthly
+            </option>
+
+            <option value="Quarterly">
+                Quarterly
+            </option>
+
+            <option value="Yearly">
+                Yearly
+            </option>
+
+            <option value="No Maintenance">
+                No Maintenance
+            </option>
+
+        </select>
+
+    </div>
+
+    <div className="form-group">
+
+        <label htmlFor="seo">
+            SEO Requirement
+        </label>
+
+        <select
+            id="seo"
+            value={seo}
+            onChange={(e) => setSeo(e.target.value)}
+        >
+
+            <option value="">
+                Select SEO Requirement
+            </option>
+
+            <option value="Basic SEO">
+                Basic SEO
+            </option>
+
+            <option value="Advanced SEO">
+                Advanced SEO
+            </option>
+
+            <option value="No SEO">
+                No SEO
+            </option>
+
+            <option value="Not Sure">
+                Not Sure
+            </option>
+
+        </select>
+
+    </div>
 
 </fieldset>
 
