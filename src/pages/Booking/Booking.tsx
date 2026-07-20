@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { createBooking } from "../../services/booking.service";
 import "./Booking.css";
 const initialFormData = {
     fullName: "",
@@ -24,7 +26,11 @@ const [errors, setErrors] = useState({
     meetingMethod: "",
 });
 const navigate = useNavigate();
+const location = useLocation();
 
+const websitePlanId = location.state?.websitePlanId;
+
+console.log("Website Plan ID:", websitePlanId);
 const [isSubmitting, setIsSubmitting] = useState(false);
 const validateForm = () => {
     const newErrors = {
@@ -65,7 +71,7 @@ if (formData.meetingMethod === "") {
 
     return newErrors;
 };
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 console.log("Submit button clicked");
     const validationErrors = validateForm();
@@ -81,15 +87,17 @@ console.log("Submit button clicked");
     }
 
   console.log("Form Submitted Successfully");
-
 setIsSubmitting(true);
 
-setTimeout(() => {
+try {
 
-    // Clear all form fields
+   await createBooking({
+    websitePlanId,
+    ...formData,
+});
+
     setFormData(initialFormData);
 
-    // Clear all validation errors
     setErrors({
         fullName: "",
         email: "",
@@ -100,16 +108,19 @@ setTimeout(() => {
         meetingMethod: "",
     });
 
-    // Reset loading state
-    setIsSubmitting(false);
-
-    // Optional: Mark form as submitted
-  
-
-    // Navigate to Thank You page
     navigate("/thank-you");
 
-}, 1500);
+} catch (error) {
+
+    console.error(error);
+
+    alert("Booking failed. Please try again.");
+
+} finally {
+
+    setIsSubmitting(false);
+
+}
 };
     return (
         <section className="booking-page">

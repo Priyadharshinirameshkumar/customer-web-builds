@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createWebsitePlan } from "../../services/websitePlan.service";
 import "./PlanWebsite.css";
 const websiteFeatures = [
   "Contact Form",
@@ -22,7 +23,7 @@ const [hosting, setHosting] = useState("");
 const [maintenance, setMaintenance] = useState("");
 const [seo, setSeo] = useState("");
 const [additionalRequirements, setAdditionalRequirements] = useState("");
-
+const [isSubmitting, setIsSubmitting] = useState(false);
 const [needsConsultation, setNeedsConsultation] = useState(false);
 const handleFeatureChange = (feature: string) => {
   if (selectedFeatures.includes(feature)) {
@@ -33,7 +34,7 @@ const handleFeatureChange = (feature: string) => {
     setSelectedFeatures([...selectedFeatures, feature]);
   }
 };
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = {
     fullName: "",
@@ -54,12 +55,78 @@ setErrors(validationErrors);
 const hasErrors = Object.values(validationErrors).some(
     (error) => error !== ""
 );
-
 if (hasErrors) {
     return;
 }
+setIsSubmitting(true);
 
-navigate("/booking");
+try {
+console.log({
+    fullName,
+    businessName,
+    email,
+    phone,
+    websiteSize,
+    selectedFeatures,
+    hosting,
+    maintenance,
+    seo,
+    additionalRequirements
+});
+    const response = await createWebsitePlan({
+        fullName,
+        businessName,
+        email,
+        phone,
+
+        websiteSize,
+
+        // Since your form doesn't have these fields yet,
+        // send empty strings for now.
+        businessType: "Business Website",
+        targetAudience: "",
+
+        // Convert array of selected features to a string
+        features: selectedFeatures.join(", "),
+
+        hosting,
+        maintenance,
+
+        seoRequirement: seo,
+
+        additionalRequirements,
+    });
+    const websitePlanId = response.data.id;
+console.log(websitePlanId);
+    // Clear the form
+    setFullName("");
+    setBusinessName("");
+    setEmail("");
+    setPhone("");
+    setWebsiteSize("");
+    setSelectedFeatures([]);
+    setHosting("");
+    setMaintenance("");
+    setSeo("");
+    setAdditionalRequirements("");
+    setNeedsConsultation(false);
+
+   navigate("/booking", {
+  state: {
+    websitePlanId,
+  },
+});
+
+} catch (error) {
+
+    console.error(error);
+
+    alert("Failed to submit website plan.");
+
+}
+finally {
+    setIsSubmitting(false);
+}
    
 };
 const [errors, setErrors] = useState({
@@ -383,8 +450,11 @@ const [errors, setErrors] = useState({
 
 </div>
 <div className="submit-section">
-<button type="submit">
-  Continue →
+<button
+    type="submit"
+    disabled={isSubmitting}
+>
+    {isSubmitting ? "Submitting..." : "Continue →"}
 </button>
 </div>
 </form>
