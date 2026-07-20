@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+const closeMenu = () => {
+  setIsMenuOpen(false);
+};
   return (
     <nav className="navbar">
       <div className="navbar-top">
@@ -20,31 +23,45 @@ function Navbar() {
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
+<ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
+  <li>
+    <HashLink smooth to="/#home"
+     onClick={closeMenu}>
+    Home
+</HashLink>
+  </li>
 
-      <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-        <li>
-  <a href="#home">Home</a>
-</li>
-        <li>
-    <a href="#templates">Templates</a>
-</li>
+  <li>
+    <HashLink smooth to="/#templates"  onClick={closeMenu}>
+    Templates
+</HashLink>
+  </li>
 
-<li>
-    <a href="#pricing">Pricing</a>
-</li>
+  <li>
+    <HashLink smooth to="/#pricing"  onClick={closeMenu}>
+    Pricing
+</HashLink>
+  </li>
 
-<li>
-    <a href="#portfolio">Portfolio</a>
-</li>
+  <li>
+    <HashLink smooth to="/#portfolio"  onClick={closeMenu}>
+    Portfolio
+</HashLink>
+  </li>
 
-<li>
-    <a href="#reviews">Reviews</a>
-</li>
-      </ul>
+  <li>
+   <HashLink smooth to="/#reviews"  onClick={closeMenu}>
+    Reviews
+</HashLink>
+  </li>
 
-      <button className="navbar-button">
-        Plan My Website
-      </button>
+  <li>
+    <NavLink to="/plan-website"  onClick={closeMenu}>
+      Plan My Website
+    </NavLink>
+  </li>
+</ul>
+      
     </nav>
   );
 }

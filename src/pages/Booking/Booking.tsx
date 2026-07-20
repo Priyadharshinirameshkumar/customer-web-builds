@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Booking.css";
-function Booking() {
-  const [formData, setFormData] = useState({
+const initialFormData = {
     fullName: "",
     companyName: "",
     email: "",
     phone: "",
-     budget: "",
-     preferredDate: "",
-     preferredTime: "",
-     meetingMethod: "",
-     additionalNotes: "",
-});
+    budget: "",
+    preferredDate: "",
+    preferredTime: "",
+    meetingMethod: "",
+    additionalNotes: "",
+};
+function Booking() {
+ const [formData, setFormData] = useState(initialFormData);
 const [errors, setErrors] = useState({
     fullName: "",
     email: "",
@@ -23,7 +24,8 @@ const [errors, setErrors] = useState({
     meetingMethod: "",
 });
 const navigate = useNavigate();
-const [isSubmitted, setIsSubmitted] = useState(false);
+
+const [isSubmitting, setIsSubmitting] = useState(false);
 const validateForm = () => {
     const newErrors = {
         fullName: "",
@@ -80,7 +82,34 @@ console.log("Submit button clicked");
 
   console.log("Form Submitted Successfully");
 
-navigate("/thank-you");
+setIsSubmitting(true);
+
+setTimeout(() => {
+
+    // Clear all form fields
+    setFormData(initialFormData);
+
+    // Clear all validation errors
+    setErrors({
+        fullName: "",
+        email: "",
+        phone: "",
+        budget: "",
+        preferredDate: "",
+        preferredTime: "",
+        meetingMethod: "",
+    });
+
+    // Reset loading state
+    setIsSubmitting(false);
+
+    // Optional: Mark form as submitted
+  
+
+    // Navigate to Thank You page
+    navigate("/thank-you");
+
+}, 1500);
 };
     return (
         <section className="booking-page">
@@ -93,11 +122,7 @@ navigate("/thank-you");
                 </p>
 
                 <div className="booking-card">
-                  {isSubmitted && (
-    <div className="success-message">
-        🎉 Your discovery call request has been submitted successfully!
-    </div>
-)}
+              
    <form onSubmit={handleSubmit}>
  <h2>Customer Information</h2>
  <div className="form-group">
@@ -408,8 +433,14 @@ navigate("/thank-you");
     rows={5}
 />
 </div>
-<button type="submit" className="submit-button">
-    Book Discovery Call
+<button
+    type="submit"
+    className="submit-button"
+    disabled={isSubmitting}
+>
+    {isSubmitting
+        ? "Submitting..."
+        : "Book Discovery Call"}
 </button>
     </form>
 </div>

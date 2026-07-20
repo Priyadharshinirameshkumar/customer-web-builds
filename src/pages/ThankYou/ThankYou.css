@@ -3,25 +3,43 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    padding: 2rem;
 }
 
-.thank-you-container {
+.thank-you-card {
     max-width: 600px;
     text-align: center;
-    background: #ffffff;
-    padding: 40px;
+    padding: 3rem;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.thank-you-container h1 {
-    color: #2563eb;
-    margin-bottom: 20px;
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
 }
 
-.thank-you-container p {
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
+.thank-you-card h1 {
+    margin-bottom: 1rem;
+}
+
+.thank-you-card p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.home-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 12px 24px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.home-button:hover {
+    background: #1d4ed8;
 }
