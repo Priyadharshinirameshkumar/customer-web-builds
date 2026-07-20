@@ -1,0 +1,93 @@
+.booking-page {
+    padding: 80px 20px;
+}
+
+.booking-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.booking-card {
+    margin-top: 40px;
+    padding: 30px;
+    border-radius: 12px;
+    background: #fff;
+}
+.form-group select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+}
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.radio-option input {
+    width: auto;
+}
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: vertical;
+    font-family: inherit;
+}
+.error-message {
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 6px;
+}
+.success-message {
+    background-color: #dcfce7;
+    color: #166534;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #86efac;
+}
+.submit-button {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 30px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+.submit-button:focus {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+.submit-button:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+}

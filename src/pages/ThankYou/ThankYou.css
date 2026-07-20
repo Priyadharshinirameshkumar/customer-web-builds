@@ -1,0 +1,27 @@
+.thank-you-page {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.thank-you-container {
+    max-width: 600px;
+    text-align: center;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.thank-you-container h1 {
+    color: #2563eb;
+    margin-bottom: 20px;
+}
+
+.thank-you-container p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
