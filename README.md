@@ -1,75 +1,332 @@
-# React + TypeScript + Vite
+# Customer Web Builds
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack web application that enables customers to plan, book, and manage custom website development services. The application includes a customer-facing website and a secure admin portal for managing website plans, bookings, appointment slots, and customer communications.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Project Overview
 
-## React Compiler
+Customer Web Builds simplifies the process of requesting a custom website by allowing customers to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Plan their website requirements
+- Book consultation appointments
+- Receive confirmation emails
+- Track a professional booking workflow
 
-## Expanding the ESLint configuration
+Administrators can securely log in to manage website plans, bookings, available slots, and customer requests through a dedicated dashboard.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Customer Portal
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Responsive landing page
+- Website planning form
+- Consultation booking form
+- Booking validation
+- Prevent duplicate bookings
+- Available slot selection
+- Confirmation page
+- Email confirmation after booking
+
+### Admin Portal
+
+- Secure JWT Authentication
+- Admin Login
+- Protected Routes
+- Dashboard
+- Manage Website Plans
+- Manage Bookings
+- Manage Appointment Slots
+- Booking Status Management
+- Customer & Admin Email Notifications
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- React Router DOM
+- Axios
+- CSS
+
+### Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- JWT Authentication
+- bcrypt
+- Nodemailer
+- Zod Validation
+
+### Database
+
+- PostgreSQL
+- Prisma
+
+---
+
+## Project Structure
 
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+customer-web-builds
+│
+├── backend
+│   ├── prisma
+│   ├── src
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── middleware
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── templates
+│   │   ├── types
+│   │   ├── utils
+│   │   └── validations
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── public
+│
+├── src
+│   ├── api
+│   ├── components
+│   ├── context
+│   ├── layouts
+│   ├── pages
+│   ├── routes
+│   ├── services
+│   ├── types
+│   └── utils
+│
+├── package.json
+└── README.md
 ```
+
+---
+
+## Application Workflow
+
+### Customer Workflow
+
+1. Visit the website.
+2. Fill in the Website Planning Form.
+3. Submit website requirements.
+4. Book an available consultation slot.
+5. Receive booking confirmation.
+6. Receive confirmation email.
+
+---
+
+### Admin Workflow
+
+1. Login using admin credentials.
+2. View dashboard.
+3. Manage website plans.
+4. Manage bookings.
+5. Confirm or cancel bookings.
+6. Manage available slots.
+7. Receive notifications for new bookings.
+
+---
+
+## Authentication
+
+The application uses JWT Authentication.
+
+Features include:
+
+- Secure Login
+- Password Hashing using bcrypt
+- Protected Routes
+- Token Validation
+- Authorization Middleware
+
+---
+
+## Database Models
+
+### WebsitePlan
+
+Stores customer website requirements.
+
+### Booking
+
+Stores consultation booking details.
+
+### Slot
+
+Stores available appointment slots.
+
+### Admin
+
+Stores administrator credentials.
+
+---
+
+## Email Notifications
+
+The application sends automated emails using Nodemailer.
+
+### Customer
+
+- Booking Confirmation
+
+### Admin
+
+- New Booking Notification
+
+---
+
+## API Modules
+
+### Authentication
+
+- Login
+- Current User
+
+### Website Plans
+
+- Create Website Plan
+- View Website Plans
+
+### Booking
+
+- Create Booking
+- Update Status
+- View Bookings
+
+### Slots
+
+- Create Slot
+- Update Slot
+- Delete Slot
+- List Available Slots
+
+### Admin
+
+- Dashboard
+- Booking Management
+- Website Plan Management
+
+---
+
+## Validation
+
+The backend validates requests using Zod.
+
+Validation includes:
+
+- Required Fields
+- Email Format
+- Phone Number
+- Date & Time
+- Booking Rules
+
+---
+
+## Security Features
+
+- JWT Authentication
+- Password Hashing
+- Input Validation
+- Error Handling
+- Protected Admin Routes
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/your-username/customer-web-builds.git
+```
+
+### Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+### Backend
+
+```bash
+cd backend
+
+npm install
+
+npx prisma generate
+
+npx prisma migrate dev
+
+npm run dev
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file inside the backend folder.
+
+Example:
+
+```env
+DATABASE_URL=
+
+JWT_SECRET=
+
+SMTP_HOST=
+
+SMTP_PORT=
+
+SMTP_USER=
+
+SMTP_PASS=
+```
+
+---
+
+## Future Improvements
+
+- Payment Integration
+- Google Calendar Integration
+- SMS Notifications
+- File Uploads
+- Analytics Dashboard
+- Customer Dashboard
+- Multi-admin Support
+
+
+## Learning Outcomes
+
+Through this project, I gained hands-on experience in:
+
+- Full Stack Development
+- React & TypeScript
+- REST API Development
+- PostgreSQL
+- Prisma ORM
+- JWT Authentication
+- Express.js
+- Node.js
+- Email Integration
+- Database Relationships
+- Form Validation
+- Responsive UI Design
+- Secure Backend Development
+
+
+
+## Author
+
+R Priyadharshini
