@@ -1,8 +1,21 @@
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
 import { createBooking } from "../../services/booking.service";
+import {
+  getAvailableSlots,
+  type AvailableSlot,
+} from "../../services/slot.service";
+import {
+  clearWebsitePlanId,
+  getWebsitePlanId,
+  saveWebsitePlanId,
+} from "../../utils/websitePlanStorage";
 import "./Booking.css";
+
+const formatSlotDate = (date: string) => date.split("T")[0];
+
 const initialFormData = {
     fullName: "",
     companyName: "",
@@ -25,13 +38,66 @@ const [errors, setErrors] = useState({
     preferredTime: "",
     meetingMethod: "",
 });
+const [slots, setSlots] = useState<AvailableSlot[]>([]);
+const [slotsLoading, setSlotsLoading] = useState(true);
+const [slotsError, setSlotsError] = useState("");
+const [submitError, setSubmitError] = useState("");
+const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
 const navigate = useNavigate();
 const location = useLocation();
 
-const websitePlanId = location.state?.websitePlanId;
+const locationPlanId = location.state?.websitePlanId as number | undefined;
+const websitePlanId = locationPlanId ?? getWebsitePlanId();
 
-console.log("Website Plan ID:", websitePlanId);
 const [isSubmitting, setIsSubmitting] = useState(false);
+
+useEffect(() => {
+  if (locationPlanId) {
+    saveWebsitePlanId(locationPlanId);
+  }
+}, [locationPlanId]);
+
+useEffect(() => {
+  if (!websitePlanId) {
+    navigate("/plan-website", {
+      replace: true,
+      state: {
+        message: "Please complete your website plan before booking a discovery call.",
+      },
+    });
+  }
+}, [websitePlanId, navigate]);
+
+const loadAvailableSlots = async () => {
+  try {
+    setSlotsLoading(true);
+    setSlotsError("");
+    const availableSlots = await getAvailableSlots();
+    setSlots(availableSlots);
+  } catch (error) {
+    console.error(error);
+    setSlotsError("Unable to load available slots. Please refresh the page.");
+  } finally {
+    setSlotsLoading(false);
+  }
+};
+
+useEffect(() => {
+  loadAvailableSlots();
+}, []);
+
+const availableDates = [
+  ...new Set(slots.map((slot) => formatSlotDate(slot.date))),
+];
+
+const timesForSelectedDate = slots
+  .filter((slot) => formatSlotDate(slot.date) === formData.preferredDate)
+  .map((slot) => ({
+    id: slot.id,
+    startTime: slot.startTime,
+    endTime: slot.endTime,
+  }));
+
 const validateForm = () => {
     const newErrors = {
         fullName: "",
@@ -64,6 +130,9 @@ if (formData.preferredDate === "") {
 if (formData.preferredTime === "") {
     newErrors.preferredTime = "Please select a preferred time.";
 }
+if (!selectedSlotId) {
+    newErrors.preferredTime = "Please select a valid available time slot.";
+}
 if (formData.meetingMethod === "") {
     newErrors.meetingMethod = "Please choose a meeting method.";
 }
@@ -86,14 +155,34 @@ console.log("Submit button clicked");
         return;
     }
 
+    if (!websitePlanId) {
+      setSubmitError(
+        "Your website plan session has expired. Please complete the plan form again."
+      );
+      return;
+    }
+
+    if (!selectedSlotId) {
+      setSubmitError("Please select an available time slot.");
+      return;
+    }
+
   console.log("Form Submitted Successfully");
 setIsSubmitting(true);
+setSubmitError("");
 
 try {
 
    await createBooking({
     websitePlanId,
-    ...formData,
+    slotId: selectedSlotId,
+    fullName: formData.fullName,
+    companyName: formData.companyName,
+    email: formData.email,
+    phone: formData.phone,
+    budget: formData.budget,
+    meetingMethod: formData.meetingMethod,
+    additionalNotes: formData.additionalNotes,
 });
 
     setFormData(initialFormData);
@@ -108,13 +197,32 @@ try {
         meetingMethod: "",
     });
 
+    clearWebsitePlanId();
     navigate("/thank-you");
 
 } catch (error) {
-
     console.error(error);
 
-    alert("Booking failed. Please try again.");
+    const axiosError = error as AxiosError<{ message?: string }>;
+    const apiMessage = axiosError.response?.data?.message ?? "";
+
+    if (
+      apiMessage.toLowerCase().includes("slot") ||
+      apiMessage.toLowerCase().includes("booked")
+    ) {
+      setSubmitError(
+        "This time slot was just booked by someone else. Please choose another available slot."
+      );
+      setFormData((prev) => ({
+        ...prev,
+        preferredDate: "",
+        preferredTime: "",
+      }));
+      setSelectedSlotId(null);
+      await loadAvailableSlots();
+    } else {
+      setSubmitError(apiMessage || "Booking failed. Please try again.");
+    }
 
 } finally {
 
@@ -135,6 +243,11 @@ try {
                 <div className="booking-card">
               
    <form onSubmit={handleSubmit}>
+ {submitError && (
+    <p className="error-banner" role="alert">
+        {submitError}
+    </p>
+ )}
  <h2>Customer Information</h2>
  <div className="form-group">
 <label htmlFor="fullName">
@@ -281,23 +394,44 @@ try {
 <label htmlFor="preferredDate">
     Preferred Date
 </label>
-<input
-    type="date"
+<select
     id="preferredDate"
     value={formData.preferredDate}
-    min={new Date().toISOString().split("T")[0]}
+    disabled={slotsLoading || availableDates.length === 0}
    onChange={(event) => {
     setFormData({
         ...formData,
         preferredDate: event.target.value,
+        preferredTime: "",
     });
+    setSelectedSlotId(null);
+    setSubmitError("");
 
     setErrors({
         ...errors,
         preferredDate: "",
+        preferredTime: "",
     });
 }}
-/>
+>
+    <option value="">
+        {slotsLoading
+            ? "Loading available dates..."
+            : availableDates.length === 0
+              ? "No available dates"
+              : "Select a date"}
+    </option>
+    {availableDates.map((date) => (
+        <option key={date} value={date}>
+            {date}
+        </option>
+    ))}
+</select>
+{slotsError && (
+    <p className="error-message">
+        {slotsError}
+    </p>
+)}
 {errors.preferredDate && (
     <p className="error-message">
         {errors.preferredDate}
@@ -308,24 +442,42 @@ try {
 <label htmlFor="preferredTime">
     Preferred Time
 </label>
-<input
-    type="time"
+<select
     id="preferredTime"
     value={formData.preferredTime}
-    min="09:00"
-    max="18:00"
+    disabled={!formData.preferredDate || timesForSelectedDate.length === 0}
     onChange={(event) => {
+    const selectedTime = event.target.value;
+    const selectedSlot = timesForSelectedDate.find(
+      (slot) => slot.startTime === selectedTime
+    );
+
+    setSelectedSlotId(selectedSlot?.id ?? null);
     setFormData({
         ...formData,
-        preferredTime: event.target.value,
+        preferredTime: selectedTime,
     });
+    setSubmitError("");
 
     setErrors({
         ...errors,
         preferredTime: "",
     });
 }}
-/>
+>
+    <option value="">
+        {!formData.preferredDate
+            ? "Select a date first"
+            : timesForSelectedDate.length === 0
+              ? "No available times"
+              : "Select a time"}
+    </option>
+    {timesForSelectedDate.map((slot) => (
+        <option key={`${slot.startTime}-${slot.endTime}`} value={slot.startTime}>
+            {slot.startTime} - {slot.endTime}
+        </option>
+    ))}
+</select>
 {errors.preferredTime && (
     <p className="error-message">
         {errors.preferredTime}

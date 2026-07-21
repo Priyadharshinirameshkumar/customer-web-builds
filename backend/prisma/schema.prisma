@@ -26,12 +26,15 @@ model Booking {
   preferredTime   String
   meetingMethod   String
   additionalNotes String?
-
-  createdAt DateTime @default(now())
+  status          BookingStatus @default(PENDING)
+  createdAt       DateTime      @default(now())
 
   websitePlanId Int @unique
 
+  slotId Int? @unique
+
   websitePlan WebsitePlan @relation(fields: [websitePlanId], references: [id])
+  slot        Slot?       @relation(fields: [slotId], references: [id])
 }
 
 model WebsitePlan {
@@ -65,4 +68,16 @@ model Slot {
   isBooked  Boolean  @default(false)
 
   createdAt DateTime @default(now())
+
+  booking Booking?
+
+  @@unique([date, startTime])
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

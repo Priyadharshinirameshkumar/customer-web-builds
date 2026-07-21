@@ -23,7 +23,7 @@ function CTA() {
 
           <button
     className="secondary-btn"
-    onClick={() => navigate("/booking")}
+    onClick={() => navigate("/plan-website")}
 >
     Book Discovery Call
 </button>

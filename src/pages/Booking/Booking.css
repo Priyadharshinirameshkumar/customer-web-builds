@@ -50,6 +50,14 @@
     font-size: 14px;
     margin-top: 6px;
 }
+.error-banner {
+    background-color: #fef2f2;
+    color: #991b1b;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #fecaca;
+}
 .success-message {
     background-color: #dcfce7;
     color: #166534;

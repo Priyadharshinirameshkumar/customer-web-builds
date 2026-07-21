@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { createWebsitePlan } from "../../services/websitePlan.service";
+import { saveWebsitePlanId } from "../../utils/websitePlanStorage";
 import "./PlanWebsite.css";
 const websiteFeatures = [
   "Contact Form",
@@ -13,6 +14,8 @@ const websiteFeatures = [
 ];
 function PlanWebsite() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectMessage = location.state?.message as string | undefined;
   const [fullName, setFullName] = useState("");
 const [businessName, setBusinessName] = useState("");
 const [email, setEmail] = useState("");
@@ -98,6 +101,8 @@ console.log({
     });
     const websitePlanId = response.data.id;
 console.log(websitePlanId);
+    saveWebsitePlanId(websitePlanId);
+
     // Clear the form
     setFullName("");
     setBusinessName("");
@@ -151,6 +156,12 @@ const [errors, setErrors] = useState({
 
       <form className="plan-card"
       onSubmit={handleSubmit}>
+
+        {redirectMessage && (
+          <p className="info-message" role="status">
+            {redirectMessage}
+          </p>
+        )}
 
         <h2>Website Requirements</h2>
         <div className="form-section">

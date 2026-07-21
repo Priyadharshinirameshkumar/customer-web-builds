@@ -1,5 +1,6 @@
 export interface BookingInput {
   websitePlanId: number;
+  slotId: number;
 
   fullName: string;
   companyName: string;
@@ -7,9 +8,6 @@ export interface BookingInput {
   phone: string;
 
   budget: string;
-
-  preferredDate: string;
-  preferredTime: string;
 
   meetingMethod: string;
 

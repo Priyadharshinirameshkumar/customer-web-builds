@@ -165,3 +165,11 @@ fieldset legend {
     font-size: 14px;
     margin-top: 6px;
 }
+.info-message {
+    background-color: #eff6ff;
+    color: #1e40af;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #bfdbfe;
+}
