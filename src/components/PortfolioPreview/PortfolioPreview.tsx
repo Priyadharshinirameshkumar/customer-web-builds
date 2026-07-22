@@ -2,16 +2,20 @@ import "./PortfolioPreview.css";
 
 import PortfolioCard from "../PortfolioCard/PortfolioCard";
 import { portfolioProjects } from "../../data/portfolioProjects";
-import SectionHeader from "../SectionHeader/SectionHeader";
 function PortfolioPreview() {
   return (
     <section id="portfolio" className="portfolio-preview">
       <div className="container">
 
-        <SectionHeader
-    title="Our Recent Projects"
-    description="Explore some example websites that showcase the quality and features we can build for your business."
-/>
+        <h2 className="section-title">
+          Our Recent Projects
+        </h2>
+
+        <p className="section-description">
+          Explore some example websites that showcase the quality and features we can build for your business.
+        </p>
+
+
         <div className="portfolio-grid">
 
           {portfolioProjects.map((project) => (

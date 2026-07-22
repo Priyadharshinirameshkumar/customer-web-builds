@@ -1,6 +1,5 @@
 import "./TestimonialsSection.css";
 
-import SectionHeader from "../SectionHeader/SectionHeader";
 import TestimonialCard from "../TestimonialCard/TestimonialCard";
 import { testimonials } from "../../data/testimonials";
 
@@ -9,10 +8,13 @@ function TestimonialsSection() {
     <section id="reviews" className="testimonials-section">
       <div className="container">
 
-        <SectionHeader
-          title="What Our Clients Say"
-          description="Hear from businesses that trusted us to build their websites."
-        />
+        <h2 className="section-title">
+          What Our Clients Say
+        </h2>
+
+        <p className="section-description">
+          Hear from businesses that trusted us to build their websites.
+        </p>
 
         <div className="testimonials-grid">
 

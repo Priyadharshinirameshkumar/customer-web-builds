@@ -1,6 +1,5 @@
 import "./TemplatesGallery.css";
 
-import SectionHeader from "../SectionHeader/SectionHeader";
 import TemplateCard from "../TemplateCard/TemplateCard";
 import { templates } from "../../data/templates";
 
@@ -9,10 +8,13 @@ function TemplatesGallery() {
     <section id="templates" className="templates-gallery">
       <div className="container">
 
-        <SectionHeader
-          title="Website Templates"
-          description="Browse our ready-made website layouts. Every template can be fully customized to match your business needs."
-        />
+        <h2 className="section-title">
+          Website Templates
+        </h2>
+
+        <p className="section-description">
+          Browse our ready-made website layouts. Every template can be fully customized to match your business needs.
+        </p>
 
         <div className="templates-grid">
 
