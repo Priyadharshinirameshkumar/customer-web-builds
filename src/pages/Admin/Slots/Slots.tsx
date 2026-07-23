@@ -4,7 +4,6 @@ import {
   getAdminSlots,
   createAdminSlot,
   updateAdminSlot,
-  deleteAdminSlot,
 } from "../../../services/admin.service";
 import type { SlotItem } from "../../../services/admin.service";
 import "./Slots.css";
@@ -126,21 +125,6 @@ const SlotsPage: React.FC = () => {
     }
   };
 
-  const handleDeleteSlot = async (id: number) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this time slot?");
-    if (!confirmDelete) return;
-
-    try {
-      setError("");
-      setSuccessMsg("");
-      await deleteAdminSlot(id);
-      setSuccessMsg("Time slot deleted successfully!");
-      fetchSlots();
-    } catch (err: any) {
-      console.error(err);
-      setError(err.response?.data?.message || "Failed to delete slot.");
-    }
-  };
 
   const getSlotStatus = (slot: SlotItem): "AVAILABLE" | "BOOKED" | "BLOCKED" => {
     if (slot.isBooked) {
@@ -309,14 +293,9 @@ const SlotsPage: React.FC = () => {
                               >
                                 Edit
                               </button>
-                              <button
-                                className="delete-action-btn"
-                                onClick={() => handleDeleteSlot(slot.id)}
-                              >
-                                Delete
-                              </button>
                             </div>
                           </td>
+
                         </tr>
                       );
                     })
