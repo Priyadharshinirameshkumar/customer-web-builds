@@ -1,7 +1,7 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2rem;
 }
 
 .dashboard-header {
@@ -10,36 +10,38 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.dashboard-header h1 {
-  font-size: 1.8rem;
+.dashboard-title {
+  font-size: 2rem;
   font-weight: 700;
   color: #1f2937;
-  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.5px;
 }
 
-.dashboard-header p {
+.dashboard-subtitle {
   color: #6b7280;
-  margin: 0;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
 }
 
 .refresh-btn {
   background-color: #ffffff;
-  border: 1px solid #d1d5db;
+  border: 1px solid #e5e7eb;
   color: #374151;
-  padding: 0.55rem 1.2rem;
+  padding: 0.6rem 1.25rem;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .refresh-btn:hover:not(:disabled) {
   background-color: #f9fafb;
-  border-color: #9ca3af;
+  border-color: #d1d5db;
 }
 
 .refresh-btn:disabled {
@@ -60,7 +62,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 0;
+  padding: 5rem 0;
   gap: 1rem;
   color: #6b7280;
 }
@@ -68,7 +70,7 @@
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid #e5e7eb;
+  border: 3px solid #f3f4f6;
   border-top-color: #2563eb;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -83,25 +85,26 @@
 /* Metric Cards Grid */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
 }
 
 .summary-card {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+  transition: all 0.3s ease;
 }
 
 .summary-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  border-color: #d1d5db;
 }
 
 .card-header {
@@ -119,35 +122,42 @@
 }
 
 .card-icon {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .card-value {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: #111827;
+  margin-top: 0.25rem;
 }
 
 .card-subtitle {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: #9ca3af;
 }
 
-/* Specific Accent Borders */
-.card-today { border-left: 4px solid #2563eb; }
-.card-pending { border-left: 4px solid #d97706; }
-.card-confirmed { border-left: 4px solid #16a34a; }
-.card-cancelled { border-left: 4px solid #dc2626; }
-.card-available { border-left: 4px solid #0284c7; }
-.card-booked { border-left: 4px solid #9333ea; }
+/* Recent Sections layout */
+.dashboard-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.75rem;
+}
 
-/* Recent Activity Section */
+@media (max-width: 992px) {
+  .dashboard-sections-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .recent-activity-section {
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+  display: flex;
+  flex-direction: column;
 }
 
 .section-header {
@@ -158,21 +168,21 @@
 }
 
 .section-header h2 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #1f2937;
-  margin: 0;
 }
 
 .view-all-link {
   color: #2563eb;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
 }
 
 .view-all-link:hover {
-  text-decoration: underline;
+  color: #1d4ed8;
 }
 
 /* Common Admin Table Styles */
@@ -192,14 +202,14 @@
   background-color: #f9fafb;
   color: #4b5563;
   font-weight: 600;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .admin-table td {
-  padding: 1rem;
+  padding: 0.85rem 1rem;
   border-bottom: 1px solid #e5e7eb;
-  color: #1f2937;
+  color: #374151;
 }
 
 .admin-table tbody tr:hover {
@@ -220,12 +230,12 @@
 /* Status Badges */
 .status-badge {
   display: inline-block;
-  padding: 0.25rem 0.65rem;
-  border-radius: 20px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .badge-pending {
@@ -244,4 +254,16 @@
   background-color: #fee2e2;
   color: #991b1b;
   border: 1px solid #fecaca;
+}
+
+.plan-badge {
+  display: inline-block;
+  background-color: #eff6ff;
+  color: #2563eb;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid #bfdbfe;
+  text-transform: uppercase;
 }

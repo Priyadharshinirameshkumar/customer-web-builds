@@ -73,6 +73,7 @@ export const getAllBookings = async () => {
 
 export const getAllSlots = async () => {
   return prisma.slot.findMany({
+    where: { isDeleted: false },
     include: {
       booking: {
         select: {
@@ -85,3 +86,43 @@ export const getAllSlots = async () => {
     orderBy: [{ date: "asc" }, { startTime: "asc" }],
   });
 };
+
+export const createSlot = async (dateStr: string, startTime: string, endTime: string, isBooked: boolean) => {
+  const date = new Date(dateStr);
+  date.setUTCHours(0, 0, 0, 0);
+  return prisma.slot.create({
+    data: {
+      date,
+      startTime,
+      endTime,
+      isBooked,
+    },
+  });
+};
+
+export const updateSlot = async (id: number, dateStr: string, startTime: string, endTime: string, isBooked: boolean) => {
+  const date = new Date(dateStr);
+  date.setUTCHours(0, 0, 0, 0);
+  return prisma.slot.update({
+    where: { id },
+    data: {
+      date,
+      startTime,
+      endTime,
+      isBooked,
+    },
+  });
+};
+
+export const deleteSlot = async (id: number) => {
+  await prisma.booking.updateMany({
+    where: { slotId: id },
+    data: { slotId: null },
+  });
+  return prisma.slot.update({
+    where: { id },
+    data: { isDeleted: true },
+  });
+};
+
+

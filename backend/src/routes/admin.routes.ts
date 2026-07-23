@@ -8,6 +8,9 @@ import {
   getDashboardSummaryController,
   getSlotsController,
   getWebsitePlansController,
+  createSlotController,
+  updateSlotController,
+  deleteSlotController,
 } from "../controllers/admin.controller";
 import { authenticateAdmin } from "../middleware/auth.middleware";
 
@@ -23,5 +26,9 @@ router.patch("/bookings/:id/confirm", confirmBookingController);
 router.patch("/bookings/:id/cancel", cancelBookingController);
 router.delete("/bookings/:id", deleteBookingController);
 router.get("/slots", getSlotsController);
+router.post("/slots", createSlotController);
+router.put("/slots/:id", updateSlotController);
+router.delete("/slots/:id", deleteSlotController);
 
 export default router;
+

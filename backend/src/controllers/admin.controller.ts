@@ -4,6 +4,9 @@ import {
   getAllSlots,
   getAllWebsitePlans,
   getDashboardSummary,
+  createSlot,
+  updateSlot,
+  deleteSlot,
 } from "../services/admin.service";
 import {
   cancelBooking,
@@ -165,3 +168,85 @@ export const getSlotsController = asyncHandler(
     });
   }
 );
+
+export const createSlotController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { date, startTime, endTime, isBooked } = req.body;
+    if (!date || !startTime || !endTime) {
+      return res.status(400).json({
+        success: false,
+        message: "Date, startTime, and endTime are required",
+      });
+    }
+    try {
+      const slot = await createSlot(date, startTime, endTime, !!isBooked);
+      return res.status(201).json({
+        success: true,
+        message: "Slot created successfully",
+        data: slot,
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        return res.status(400).json({
+          success: false,
+          message: "A slot already exists for this date and start time",
+        });
+      }
+      throw error;
+    }
+  }
+);
+
+export const updateSlotController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id as string, 10);
+    const { date, startTime, endTime, isBooked } = req.body;
+    if (isNaN(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid slot ID",
+      });
+    }
+    if (!date || !startTime || !endTime) {
+      return res.status(400).json({
+        success: false,
+        message: "Date, startTime, and endTime are required",
+      });
+    }
+    try {
+      const slot = await updateSlot(id, date, startTime, endTime, !!isBooked);
+      return res.status(200).json({
+        success: true,
+        message: "Slot updated successfully",
+        data: slot,
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        return res.status(400).json({
+          success: false,
+          message: "A slot already exists for this date and start time",
+        });
+      }
+      throw error;
+    }
+  }
+);
+
+export const deleteSlotController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id as string, 10);
+    if (isNaN(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid slot ID",
+      });
+    }
+    await deleteSlot(id);
+    return res.status(200).json({
+      success: true,
+      message: "Slot deleted successfully",
+    });
+  }
+);
+
+

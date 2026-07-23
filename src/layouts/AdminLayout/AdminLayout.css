@@ -132,11 +132,30 @@
   background-color: #f8fafc;
 }
 
+.admin-user-info-link {
+  text-decoration: none;
+  display: block;
+}
+
+.admin-user-info-link:hover .user-avatar {
+  background-color: var(--admin-primary-hover);
+}
+
+.admin-user-info-link:hover .user-email {
+  color: var(--admin-primary);
+}
+
 .admin-user-info {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
+
+.sidebar-logout-btn:hover {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+}
+
 
 .user-avatar {
   width: 36px;

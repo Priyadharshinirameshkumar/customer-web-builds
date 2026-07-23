@@ -75,6 +75,7 @@ export const getAvailableSlots = async (): Promise<AvailableSlot[]> => {
   return prisma.slot.findMany({
     where: {
       isBooked: false,
+      isDeleted: false,
       date: {
         gte: today,
       },
@@ -88,3 +89,4 @@ export const getAvailableSlots = async (): Promise<AvailableSlot[]> => {
     orderBy: [{ date: "asc" }, { startTime: "asc" }],
   });
 };
+

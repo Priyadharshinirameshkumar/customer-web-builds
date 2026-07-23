@@ -95,3 +95,19 @@ export const getAdminSlots = async () => {
   const response = await api.get<{ success: boolean; data: SlotItem[] }>("/admin/slots");
   return response.data.data;
 };
+
+export const createAdminSlot = async (slot: { date: string; startTime: string; endTime: string; isBooked: boolean }) => {
+  const response = await api.post<{ success: boolean; data: SlotItem }>("/admin/slots", slot);
+  return response.data.data;
+};
+
+export const updateAdminSlot = async (id: number, slot: { date: string; startTime: string; endTime: string; isBooked: boolean }) => {
+  const response = await api.put<{ success: boolean; data: SlotItem }>(`/admin/slots/${id}`, slot);
+  return response.data.data;
+};
+
+export const deleteAdminSlot = async (id: number) => {
+  const response = await api.delete<{ success: boolean; message: string }>(`/admin/slots/${id}`);
+  return response.data;
+};
+

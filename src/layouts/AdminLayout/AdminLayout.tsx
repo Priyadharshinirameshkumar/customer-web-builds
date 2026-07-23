@@ -79,26 +79,28 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             <span className="nav-text">Time Slots</span>
           </NavLink>
 
-          <NavLink
-            to="/admin/profile"
-            className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
-            onClick={closeSidebar}
+          <button
+            onClick={handleLogout}
+            className="nav-item sidebar-logout-btn"
+            style={{ width: "100%", background: "none", border: "none", textAlign: "left", cursor: "pointer" }}
           >
-            <span className="nav-icon">👤</span>
-            <span className="nav-text">Profile</span>
-          </NavLink>
+            <span className="nav-icon">🚪</span>
+            <span className="nav-text">Logout</span>
+          </button>
         </nav>
 
         <div className="sidebar-footer">
-          <div className="admin-user-info">
-            <div className="user-avatar">
-              {admin?.email ? admin.email.charAt(0).toUpperCase() : "A"}
+          <NavLink to="/admin/profile" className="admin-user-info-link" onClick={closeSidebar}>
+            <div className="admin-user-info">
+              <div className="user-avatar">
+                {admin?.email ? admin.email.charAt(0).toUpperCase() : "A"}
+              </div>
+              <div className="user-details">
+                <span className="user-email">{admin?.email || "Admin"}</span>
+                <span className="user-role">Administrator Settings</span>
+              </div>
             </div>
-            <div className="user-details">
-              <span className="user-email">{admin?.email || "Admin"}</span>
-              <span className="user-role">Administrator</span>
-            </div>
-          </div>
+          </NavLink>
         </div>
       </aside>
 
